@@ -1,10 +1,10 @@
 parcial1(ana,7).
-parcial1(juan,4).
+parcial1(juan,7).
 parcial1(julio, 2).
 parcial1(maria, 10).
 
 parcial2(ana,9).
-parcial2(juan,8).
+parcial2(juan,7).
 parcial2(julio, 4).
 parcial2(maria, 2).
 parcial2(nicole, 10).
@@ -53,7 +53,11 @@ maxnota(A):- nota(_,A), \+proyeccion(A).
 % 5. Ahora se desea obtener cuales fueron las dos notas más altas, 
 % considerando simplemente a la nota como el promedio de la nota de parcial1 y parcial2. 
 % Solo interesan los números. Un tip es pensar la resolución en dos etapas, la más alta, y después la más alta de lo restante
-%No se como hacerlo xD
+producto_cartesiano2(A,B):-
+    proyeccion(A), proyeccion(B).
+seleccion2(A,B):- producto_cartesiano2(A,B), A < B.
+proyeccion2(A):- seleccion2(A, _).
+max_notas_2(A):- nota(_,A), \+proyeccion2(A).
 
 %Versión 2
 %El listado se compone de al menos una nota para cada alumno. 
@@ -65,9 +69,3 @@ alumnostotales(Alumno):-(parcial1(Alumno,_);parcial2(Alumno,_)).
 ausentes(Alumno):-
     alumnostotales(Alumno),
     \+alumno(Alumno).
-  
-
-
-    
-
-
